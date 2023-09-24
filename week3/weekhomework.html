@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App</title>
+  </head>
+  <body>
+    <script src="weather.js">
+          let weather = {
+        paris: {
+          temp: 19.7,
+          humidity: 80
+        },
+        tokyo: {
+          temp: 17.3,
+          humidity: 50
+        },
+        lisbon: {
+          temp: 30.2,
+          humidity: 20
+        },
+        "san francisco": {
+          temp: 20.9,
+          humidity: 100
+        },
+        oslo: {
+          temp: -5,
+          humidity: 20
+        }
+      };
+
+      function roundToNearestWhole(number) {
+        return Math.round(number);
+      }
+
+      function displayWeather(city) {
+        city = city.toLowerCase();
+
+        if (weather.hasOwnProperty(city)) {
+          const { temp, humidity } = weather[city];
+          const tempCelsius = roundToNearestWhole(temp);
+          const tempFahrenheit = roundToNearestWhole((temp * 9) / 5 + 32);
+
+          alert(`It is currently ${tempCelsius}°C (${tempFahrenheit}°F) in ${city} with a humidity of ${humidity}%.`);
+        } else {
+          const encodedCity = encodeURIComponent(city);
+          alert(`Sorry, we don't know the weather for this city, try going to https://www.google.com/search?q=weather+${encodedCity}`);
+        }
+      }
+
+      const userInput = prompt("Enter a city");
+      if (userInput) {
+        displayWeather(userInput);
+      }
+    </script>
+  </body>
+</html>
